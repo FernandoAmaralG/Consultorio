@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+  
+    <ui:composition template="template.xhtml">
+        
+        <ui:define name="conteudo">
+            
+            <p:panel header="Cadastro de Logins">
+                
+                <h:form>
+                    
+                    <h:inputHidden value="#{loginController.login.idLogin}" />
+                    
+                    <p:growl showDetail="false" sticky="false"/>
+                    
+                    <h:panelGrid columns="2">
+                        
+                        <h:outputText value="Usuário:" />
+                        <p:inputText value="#{loginController.login.usuario}" />
+                        
+                        <h:outputText value="Senha:" />
+                        <p:inputText value="#{loginController.login.senha}" />
+                        
+                    </h:panelGrid>
+                   
+                    <p:commandButton value="Salvar" 
+                                     actionListener="#{loginController.salvar()}"
+                                     update="@form"/>
+                    
+                    
+                    <p:dataTable value="#{loginController.listarLogins()}"
+                                 rows="5"
+                                 paginator="true"
+                                 emptyMessage="Nenhum login cadastrado"
+                                 var="login">
+                                 
+                        <p:column headerText="Código">
+                            #{login.idLogin}
+                        </p:column>
+                        
+                        <p:column headerText="Usuário">
+                            #{login.usuario}
+                        </p:column>
+                        
+                        <p:column headerText="Senha">
+                            #{login.senha}
+                        </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton actionListener="#{loginController.editar(login)}"
+                                             update="@form"
+                                             value="Editar"/>
+                        </p:column>
+                        
+                        <p:column headerText="Excluir">
+                        	<p:commandButton value="Excluir" 
+                        					 actionListener="#{loginController.excluir(login)}"
+                        					 update="@form"/>    
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    
+                </h:form>
+                
+                
+            </p:panel>
+            
+        </ui:define>
+        
+    </ui:composition>
+    
+</html>

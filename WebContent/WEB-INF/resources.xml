@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<resources>
+    
+    <Resource id="consultorio" type="javax.sql.DataSource">
+	    jdbcDriver = com.mysql.jdbc.Driver
+	    jdbcUrl = jdbc:mysql://127.0.0.1:3306/consultorio
+	    password = 
+	    userName = root
+	</Resource>
+
+</resources>

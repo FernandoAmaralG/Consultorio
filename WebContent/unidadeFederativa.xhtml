@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+  
+    <ui:composition template="template.xhtml">
+        
+        <ui:define name="conteudo">
+            
+            <p:panel header="Unidades Federativas">
+                
+                <h:form>
+                    
+                    <h:inputHidden value="#{unidadeFederativaController.unidadeFederativa.uf}" />
+                    
+                    <p:growl showDetail="false" sticky="false"/>
+                    
+                    <h:panelGrid columns="10">
+                        
+                        <h:outputText value="Sigla:" />
+                        <p:inputText value="#{unidadeFederativaController.unidadeFederativa.uf}" />
+                        
+                        <h:outputText value="Descrição:" />
+                        <p:inputText value="#{unidadeFederativaController.unidadeFederativa.descricao}" />
+                        
+                    </h:panelGrid>
+                   
+                    <p:commandButton value="Salvar" 
+                                     actionListener="#{unidadeFederativaController.salvar()}"
+                                     update="@form"/>
+                    
+                    
+                    <p:dataTable value="#{unidadeFederativaController.listarUnidadesFederativas()}"
+                                 rows="2"
+                                 paginator="true"
+                                 emptyMessage="Nenhuma unidade federativa cadastrada"
+                                 var="unidadeFederativa">
+                        
+                        <p:column headerText="Representação por Sigla">
+                            #{unidadeFederativa.uf}
+                        </p:column>
+                        
+                        <p:column headerText="Descrição">
+                            #{unidadeFederativa.descricao}
+                        </p:column>
+                        
+                        <p:column headerText="Editar">
+                            <p:commandButton actionListener="#{unidadeFederativaController.editar(unidadeFederativa)}"
+                                             update="@form"
+                                             value="Editar"/>
+                        </p:column>
+                        
+                        <p:column headerText="Excluir">
+                        	<p:commandButton value="Excluir" 
+                        					 actionListener="#{unidadeFederativaController.excluir(unidadeFederativa)}"
+                        					 update="@form"/>    
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    
+                </h:form>
+                
+                
+            </p:panel>
+            
+        </ui:define>
+        
+    </ui:composition>
+    
+</html>
